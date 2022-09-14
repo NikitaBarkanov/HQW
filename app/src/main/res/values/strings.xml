@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">HQW</string>
-    <string name="NMedia">NMedia!</string>
+    <string name="NMedia" translatable="false">Приветики</string>
 </resources>
