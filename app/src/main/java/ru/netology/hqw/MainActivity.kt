@@ -1,5 +1,6 @@
 package ru.netology.hqw
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -10,13 +11,14 @@ import ru.netology.hqw.R.layout.activity_main
 class MainActivity : AppCompatActivity() {
     private lateinit var textView: TextView
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(activity_main)
-        textView = findViewById(R.id.likes)
-        textView = findViewById(R.id.comments)
-        textView = findViewById(R.id.replies)
-        textView = findViewById(R.id.views)
+        textView = findViewById(R.id.likesCount)
+        textView = findViewById(R.id.commentsCount)
+        textView = findViewById(R.id.repliesCount)
+        textView = findViewById(R.id.viewsCount)
     }
 
     fun onClick(view: View) {
