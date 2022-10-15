@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">HQW</string>
     <string name="Hello">Hello</string>
+    <string name="laikov_0" tools:ignore="ExtraTranslation">likes</string>
+    <string name="comments_0" tools:ignore="ExtraTranslation">comments</string>
+    <string name="replies_0" tools:ignore="ExtraTranslation">replies</string>
+    <string name="views_0" tools:ignore="ExtraTranslation">views</string>
 </resources>

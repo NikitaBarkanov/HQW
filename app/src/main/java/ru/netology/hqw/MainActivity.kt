@@ -13,6 +13,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(activity_main)
+        textView = findViewById(R.id.likes)
+        textView = findViewById(R.id.comments)
+        textView = findViewById(R.id.replies)
+        textView = findViewById(R.id.views)
     }
 
     fun onClick(view: View) {
