@@ -2,11 +2,23 @@ package ru.netology.hqw
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.TextView
 import ru.netology.hqw.R.layout.activity_main
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var textView: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(activity_main)
+    }
+
+    fun onClick(view: View) {
+        val fCount = textView.text.toString()
+        var count: Int = Integer.parseInt(fCount)
+        count++
+        textView.text = count.toString()
     }
 }

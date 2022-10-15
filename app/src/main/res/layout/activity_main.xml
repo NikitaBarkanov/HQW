@@ -47,6 +47,8 @@
         android:layout_margin="@dimen/margin_default"
         android:background="@android:color/transparent"
         android:contentDescription="@string/Hello"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
         android:src="@drawable/ic_baseline_more_vert_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -67,6 +69,54 @@
         app:layout_constraintTop_toTopOf="@id/barrier2"
         tools:text="@sample/posts.json/data/content" />
 
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="content" />
 
+    <ImageButton
+        android:id="@+id/likes"
+        android:layout_width="32dp"
+        android:layout_height="48dp"
+        android:layout_margin="@dimen/margin_default"
+        android:contentDescription="@string/laikov_0"
+        android:onClick="onClick"
+        android:src="@drawable/ic_baseline_favorite_24"
+        app:layout_constraintTop_toTopOf="@id/barrier3" />
+
+    <ImageButton
+        android:id="@+id/comments"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="@dimen/margin_default"
+        android:contentDescription="@string/comments_0"
+        android:src="@drawable/ic_baseline_comment_24"
+        android:onClick="onClick"
+        app:layout_constraintStart_toEndOf="@id/likes"
+        app:layout_constraintTop_toTopOf="@id/barrier3" />
+
+    <ImageButton
+        android:id="@+id/replies"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="@dimen/margin_default"
+        android:contentDescription="@string/replies_0"
+        android:src="@drawable/ic_round_share_24"
+        android:onClick="onClick"
+        app:layout_constraintStart_toEndOf="@id/comments"
+        app:layout_constraintTop_toTopOf="@id/barrier3" />
+
+    <ImageButton
+        android:id="@+id/views"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="@dimen/margin_default"
+        android:contentDescription="@string/views_0"
+        android:src="@drawable/ic_baseline_visibility_24"
+        android:onClick="onClick"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/barrier3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
