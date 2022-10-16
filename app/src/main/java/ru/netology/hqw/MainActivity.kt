@@ -14,11 +14,11 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(activity_main)
+/*        setContentView(activity_main)
         textView = findViewById(R.id.likes)
         textView = findViewById(R.id.comments)
         textView = findViewById(R.id.replies)
-        textView = findViewById(R.id.views)
+        textView = findViewById(R.id.views)*/
     }
 
 /*    fun onClick(view: View) {
