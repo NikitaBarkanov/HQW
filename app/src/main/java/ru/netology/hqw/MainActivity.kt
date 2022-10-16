@@ -15,16 +15,17 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(activity_main)
-        textView = findViewById(R.id.likesCount)
-        textView = findViewById(R.id.commentsCount)
-        textView = findViewById(R.id.repliesCount)
-        textView = findViewById(R.id.viewsCount)
+        textView = findViewById(R.id.likes)
+        textView = findViewById(R.id.comments)
+        textView = findViewById(R.id.replies)
+        textView = findViewById(R.id.views)
     }
 
-    fun onClick(view: View) {
+/*    fun onClick(view: View) {
         val fCount = textView.text.toString()
         var count: Int = Integer.parseInt(fCount)
         count++
         textView.text = count.toString()
-    }
+        print(view)
+    }*/
 }
