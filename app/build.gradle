@@ -16,6 +16,8 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures.viewBinding = true
+
     buildTypes {
         release {
             minifyEnabled false
@@ -32,6 +34,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+    namespace 'ru.netology.hqw'
 }
 
 dependencies {
