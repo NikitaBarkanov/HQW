@@ -4,15 +4,9 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.Button
-import android.widget.TextView
-import ru.netology.hqw.R.layout.activity_main
 import ru.netology.hqw.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var textView: TextView
-
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
