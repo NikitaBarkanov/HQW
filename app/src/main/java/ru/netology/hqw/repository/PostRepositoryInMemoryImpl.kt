@@ -25,9 +25,6 @@ class PostRepositoryInMemoryImpl: PostRepository {
     }
 
     override fun likesCount() {
-/*        post = post.copy(likes = post.likes + 1)
-        data.value = post*/
-
         post = if (post.likedByMe)
             post.copy(likes = post.likes + 1)
         else
