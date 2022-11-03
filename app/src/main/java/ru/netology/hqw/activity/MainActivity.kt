@@ -42,10 +42,7 @@ class MainActivity : AppCompatActivity() {
             likes.setImageResource(
                     if (state.post.likedByMe) R.drawable.ic_baseline_liked_24 else R.drawable.ic_baseline_favorite_24
                 )
-            likes.setOnClickListener{
-                viewModel.like()
             }
-        }
     }
 
     private fun setupListeners() {
@@ -59,13 +56,13 @@ class MainActivity : AppCompatActivity() {
 
         binding.replies.setOnClickListener {
             Log.d("replies", "replies")
-            //viewModel.reply()
+            viewModel.reply()
         }
 
-/*        binding.likes.setOnClickListener {
+       binding.likes.setOnClickListener {
             Log.d("like", "like")
             viewModel.like()
-        }*/
+        }
     }
 
 }

@@ -28,7 +28,7 @@ class PostViewModel: ViewModel(){
     fun like(){
         try{
             repository.like()
-            repository.likesCount()
+            //repository.likesCount()
             //repository.likesCount()
             changeState(ScreenState.Working(repository.get().value ?: Post()))
         } catch (e: Throwable) {
@@ -39,7 +39,7 @@ class PostViewModel: ViewModel(){
 
     fun reply(){
         repository.reply()
-        repository.repliesCount()
+        //repository.repliesCount()
         //repository.repliesCount()
         changeState(ScreenState.Working(repository.get().value ?: Post()))
     }

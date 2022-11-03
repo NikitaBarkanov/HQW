@@ -21,28 +21,39 @@ class PostRepositoryInMemoryImpl: PostRepository {
 
     override fun like() {
         post = post.copy(likedByMe =! post.likedByMe)
-        data.value = post
-    }
-
-    override fun likesCount() {
         post = if (post.likedByMe)
             post.copy(likes = post.likes + 1)
         else
             post.copy(likes = post.likes - 1)
         data.value?.likes
-    }
-
-    override fun reply() {
-        post = post.copy(repliedByMe = !post.repliedByMe)
         data.value = post
     }
 
-    override fun repliesCount() {
+/*    override fun likesCount() {
+        post = if (post.likedByMe)
+            post.copy(likes = post.likes + 1)
+        else
+            post.copy(likes = post.likes - 1)
+        data.value?.likes
+    }*/
+
+    override fun reply() {
+        post = post.copy(repliedByMe = !post.repliedByMe)
         post = if (post.repliedByMe)
             post.copy(likes = post.replies + 1)
         else
             post.copy(likes = post.replies - 1)
 
         data.value?.replies
+        data.value = post
     }
+
+/*    override fun repliesCount() {
+        post = if (post.repliedByMe)
+            post.copy(likes = post.replies + 1)
+        else
+            post.copy(likes = post.replies - 1)
+
+        data.value?.replies
+    }*/
 }
