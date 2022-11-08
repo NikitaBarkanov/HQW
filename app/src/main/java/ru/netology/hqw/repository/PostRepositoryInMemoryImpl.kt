@@ -39,11 +39,9 @@ class PostRepositoryInMemoryImpl: PostRepository {
     override fun reply() {
         post = post.copy(repliedByMe = !post.repliedByMe)
         post = if (post.repliedByMe)
-            post.copy(likes = post.replies + 1)
+            post.copy(replies = post.replies + 1)
         else
-            post.copy(likes = post.replies - 1)
-
-        data.value?.replies
+            post.copy(replies = post.replies - 1)
         data.value = post
     }
 

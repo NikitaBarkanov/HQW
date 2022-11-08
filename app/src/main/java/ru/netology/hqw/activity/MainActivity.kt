@@ -39,9 +39,16 @@ class MainActivity : AppCompatActivity() {
             author.text = state.post.author
             published.text = state.post.published
             content.text = state.post.content
+            likesCount.text = state.post.likes.toString()
             likes.setImageResource(
                     if (state.post.likedByMe) R.drawable.ic_baseline_liked_24 else R.drawable.ic_baseline_favorite_24
                 )
+
+            //if (state.post.likedByMe) state.post = state.post.copy(likes = state.post.likes + 1)
+               // else state.post = state.post.copy(likes = state.post.likes - 1)
+            likesCount.text = state.post.likes.toString()
+            //if (state.post.repliedByMe) state.post = state.post.copy(replies = state.post.replies + 1)
+            repliesCount.text = state.post.replies.toString()
             }
     }
 
