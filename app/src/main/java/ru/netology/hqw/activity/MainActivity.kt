@@ -1,26 +1,30 @@
 package ru.netology.hqw.activity
 
-import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import ru.netology.hqw.R
+import ru.netology.hqw.adapter.PostAdapter
 import ru.netology.hqw.databinding.ActivityMainBinding
 import ru.netology.hqw.viewModel.PostViewModel
 import ru.netology.hqw.viewModel.ScreenState
 
 class MainActivity : AppCompatActivity() {
 
-    val viewModel: PostViewModel by viewModels()
-    val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        subscribe()
-        setupListeners()
+
+        val viewModel: PostViewModel by viewModels()
+        val adapter = PostAdapter {
+            viewModel.likeById(it.id)
+        }
+        binding.list.adapter = adapter
+        viewModel.data.observe(this) { posts ->
+            adapter.list = posts
+        }
     }
 
     private fun subscribe() {
@@ -43,11 +47,7 @@ class MainActivity : AppCompatActivity() {
             likes.setImageResource(
                     if (state.post.likedByMe) R.drawable.ic_baseline_liked_24 else R.drawable.ic_baseline_favorite_24
                 )
-
-            //if (state.post.likedByMe) state.post = state.post.copy(likes = state.post.likes + 1)
-               // else state.post = state.post.copy(likes = state.post.likes - 1)
             likesCount.text = state.post.likes.toString()
-            //if (state.post.repliedByMe) state.post = state.post.copy(replies = state.post.replies + 1)
             repliesCount.text = state.post.replies.toString()
             }
     }
@@ -63,12 +63,12 @@ class MainActivity : AppCompatActivity() {
 
         binding.replies.setOnClickListener {
             Log.d("replies", "replies")
-            viewModel.reply()
+            viewModel.replyById(id = binding.root.id.toLong())
         }
 
        binding.likes.setOnClickListener {
             Log.d("like", "like")
-            viewModel.like()
+            viewModel.likeById(id = binding.root.id.toLong())
         }
     }
 

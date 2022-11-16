@@ -1,6 +1,5 @@
 package ru.netology.hqw.viewModel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,15 +16,18 @@ class PostViewModel: ViewModel(){
     private val repository: PostRepository = PostRepositoryInMemoryImpl()
 
     init{
-        val post = repository.get().value
-        changeState(ScreenState.Working(post ?: Post()))
+        val post = repository.getAll().value
+        changeState(ScreenState.Working((post ?: Post()) as Post))
     }
 
     private fun changeState(newState: ScreenState){
         _screenState.value = newState
     }
 
-    fun like(){
+    fun likeById (id : Long) = repository.likeById(id)
+    fun replyById (id: Long) = repository.replyById(id)
+
+/*    fun like(){
         try{
             repository.like()
             //repository.likesCount()
@@ -35,13 +37,13 @@ class PostViewModel: ViewModel(){
             Log.e("PostViewModel", "like: $e", )
             changeState(ScreenState.Error)
         }
-    }
+    }*/
 
-    fun reply(){
+/*    fun reply(){
         repository.reply()
         //repository.repliesCount()
         //repository.repliesCount()
         changeState(ScreenState.Working(repository.get().value ?: Post()))
-    }
+    }*/
 
 }
