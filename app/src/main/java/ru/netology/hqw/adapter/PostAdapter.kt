@@ -1,37 +1,34 @@
 package ru.netology.hqw.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import ru.netology.hqw.R
+import ru.netology.hqw.databinding.PostCardBinding
 import ru.netology.hqw.dto.Post
+import ru.netology.hqw.repository.PostDiffCallback
 
 
 typealias OnLikeListener = (post : Post) -> Unit
 
-class PostAdapter (private val onLikeListener: OnLikeListener) : RecyclerView.Adapter<PostViewHolder>() {
-    var list = emptyList<Post>()
-        @SuppressLint("NotifyDataSetChanged")
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+class PostAdapter (private val onLikeListener: OnLikeListener) : ListAdapter<Post, PostViewHolder>(
+    PostDiffCallback()
+) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
-        val binding = CardPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = PostCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PostViewHolder(binding, onLikeListener)
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-        val post = list[position]
+        val post = getItem(position)
         holder.bind(post)
     }
-
-    override fun getItemCount(): Int = list.size
 }
 
 class PostViewHolder(
-    private val binding: CardPostBinding,
+    private val binding: PostCardBinding,
     private val onLikeListener: OnLikeListener
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(post: Post) {
@@ -39,10 +36,10 @@ class PostViewHolder(
             author.text = post.author
             published.text = post.published
             content.text = post.content
-            like.setImageResource(
-                if (post.likedByMe) R.drawable.ic_liked_24 else R.drawable.ic_like_24
+            likes.setImageResource(
+                if (post.likedByMe) R.drawable.ic_baseline_liked_24 else R.drawable.ic_baseline_favorite_24
             )
-            like.setOnClickListener {
+            likes.setOnClickListener {
                 onLikeListener(post)
             }
         }
