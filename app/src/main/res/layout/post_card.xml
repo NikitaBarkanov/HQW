@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".activity.MainActivity">
 
     <ImageView
@@ -83,7 +83,7 @@
         android:layout_width="32dp"
         android:layout_height="48dp"
         android:layout_margin="@dimen/margin_default"
-        android:contentDescription="@string/laikov_0"
+        android:contentDescription="@string/likes_0"
         android:src="@drawable/ic_baseline_favorite_24"
         app:layout_constraintTop_toTopOf="@id/barrier3"
         tools:ignore="DuplicateSpeakableTextCheck,ImageContrastCheck" />

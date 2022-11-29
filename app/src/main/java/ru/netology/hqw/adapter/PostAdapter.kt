@@ -11,14 +11,16 @@ import ru.netology.hqw.repository.PostDiffCallback
 
 
 typealias OnLikeListener = (post : Post) -> Unit
+typealias OnReplyListener = (post: Post) -> Unit
 
-class PostAdapter (private val onLikeListener: OnLikeListener) : ListAdapter<Post, PostViewHolder>(
+class PostAdapter (private val onLikeListener: OnLikeListener,
+                   private val onReplyListener: OnReplyListener) : ListAdapter<Post, PostViewHolder>(
     PostDiffCallback()
 ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val binding = PostCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return PostViewHolder(binding, onLikeListener)
+        return PostViewHolder(binding, onLikeListener, onReplyListener)
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
@@ -29,7 +31,8 @@ class PostAdapter (private val onLikeListener: OnLikeListener) : ListAdapter<Pos
 
 class PostViewHolder(
     private val binding: PostCardBinding,
-    private val onLikeListener: OnLikeListener
+    private val onLikeListener: OnLikeListener,
+    private val onReplyListener: OnReplyListener
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(post: Post) {
         binding.apply {
@@ -41,6 +44,9 @@ class PostViewHolder(
             )
             likes.setOnClickListener {
                 onLikeListener(post)
+            }
+            replies.setOnClickListener {
+                onReplyListener(post)
             }
         }
     }
