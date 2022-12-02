@@ -1,5 +1,6 @@
 package ru.netology.hqw.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -26,6 +27,8 @@ class PostAdapter (private val onLikeListener: OnLikeListener,
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val post = getItem(position)
         holder.bind(post)
+        holder.bindLike(post)
+        holder.bindReplies(post)
     }
 }
 
@@ -34,6 +37,7 @@ class PostViewHolder(
     private val onLikeListener: OnLikeListener,
     private val onReplyListener: OnReplyListener
 ) : RecyclerView.ViewHolder(binding.root) {
+    @SuppressLint("SetTextI18n")
     fun bind(post: Post) {
         binding.apply {
             author.text = post.author
@@ -42,12 +46,36 @@ class PostViewHolder(
             likes.setImageResource(
                 if (post.likedByMe) R.drawable.ic_baseline_liked_24 else R.drawable.ic_baseline_favorite_24
             )
+/*            likes.setOnClickListener {
+                onLikeListener(post)
+            }*/
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    fun bindLike(post: Post) {
+        binding.apply {
+            if (post.likedByMe)
+                likesCount.text = (post.likes + 1).toString()
+            else likesCount.text = (post.likes).toString()
             likes.setOnClickListener {
                 onLikeListener(post)
             }
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    fun bindReplies(post: Post) {
+        binding.apply {
+            if (post.repliedByMe)
+                repliesCount.text = (post.replies + 1).toString()
+            else repliesCount.text = (post.replies).toString()
             replies.setOnClickListener {
                 onReplyListener(post)
             }
         }
+
+
     }
 }
+

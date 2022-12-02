@@ -79,33 +79,14 @@ class PostRepositoryInMemoryImpl: PostRepository {
         posts = posts.map {
             if (it.id != Id) it else it.copy(likedByMe = !it.likedByMe)
         }
-/*        posts = posts.map {
-            if (it.likedByMe)
-                it.copy(likes = it.likes + 1)
-            else
-                it.copy(likes = it.likes - 1)
-        }*/
         data.value = posts
-        likesCount()
     }
 
-    fun likesCount(){
-        posts.map { {
-            if(it.likedByMe) it.copy(likes = it.likes + 1)
-            else it.copy(likes = it.likes - 1)
-        } }
-        data.value = posts
-    }
+
 
     override fun replyById(Id: Long) {
         posts = posts.map {
             if (it.id != Id) it else it.copy(repliedByMe = !it.repliedByMe)
-        }
-        posts = posts.map {
-            if (it.repliedByMe)
-                it.copy(replies = it.replies + 1)
-            else
-                it.copy(replies = it.replies - 1)
         }
             data.value = posts
         }
