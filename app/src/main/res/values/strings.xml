@@ -1,8 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">HQW</string>
     <string name="Hello"> Hello </string>
-    <string name="likes_0" tools:ignore="ExtraTranslation" translatable="false">likes</string>
-    <string name="comments_0" tools:ignore="ExtraTranslation">comments</string>
-    <string name="replies_0" tools:ignore="ExtraTranslation">replies</string>
-    <string name="views_0" tools:ignore="ExtraTranslation">views</string>
+    <string name="likes_0" tools:ignore="ExtraTranslation" translatable="false">Like</string>
+    <string name="comments_0" tools:ignore="ExtraTranslation">Comments</string>
+    <string name="replies_0" tools:ignore="ExtraTranslation">Replies</string>
+    <string name="views_0" tools:ignore="ExtraTranslation">Views</string>
+    <string name="menu_remove" translatable="false">Remove</string>
+    <string name="post_text" translatable="false">Post Text</string>
+    <string name="menu_edit" translatable="false">Edit</string>
+    <string name="error_empty_content" translatable="false">Content can\'t be empty</string>
+    <string name="save" translatable="false">Save</string>/>
 </resources>

@@ -3,25 +3,22 @@ package ru.netology.hqw.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.hqw.R
 import ru.netology.hqw.databinding.PostCardBinding
 import ru.netology.hqw.dto.Post
+import ru.netology.hqw.listeners.OnInteractionListeners
 import ru.netology.hqw.repository.PostDiffCallback
 
-
-typealias OnLikeListener = (post : Post) -> Unit
-typealias OnReplyListener = (post: Post) -> Unit
-
-class PostAdapter (private val onLikeListener: OnLikeListener,
-                   private val onReplyListener: OnReplyListener) : ListAdapter<Post, PostViewHolder>(
+class PostAdapter (private val onInteractionListeners: OnInteractionListeners) : ListAdapter<Post, PostViewHolder>(
     PostDiffCallback()
 ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val binding = PostCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return PostViewHolder(binding, onLikeListener, onReplyListener)
+        return PostViewHolder(binding, onInteractionListeners)
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
@@ -34,10 +31,8 @@ class PostAdapter (private val onLikeListener: OnLikeListener,
 
 class PostViewHolder(
     private val binding: PostCardBinding,
-    private val onLikeListener: OnLikeListener,
-    private val onReplyListener: OnReplyListener
+    private val onInteractionListeners: OnInteractionListeners
 ) : RecyclerView.ViewHolder(binding.root) {
-    @SuppressLint("SetTextI18n")
     fun bind(post: Post) {
         binding.apply {
             author.text = post.author
@@ -46,9 +41,26 @@ class PostViewHolder(
             likes.setImageResource(
                 if (post.likedByMe) R.drawable.ic_baseline_liked_24 else R.drawable.ic_baseline_favorite_24
             )
-/*            likes.setOnClickListener {
-                onLikeListener(post)
-            }*/
+
+            menu.setOnClickListener {
+                PopupMenu(it.context, it).apply {
+                    inflate(R.menu.menu)
+                    setOnMenuItemClickListener { item ->
+                        when (item.itemId) {
+                            R.id.remove -> {
+                                onInteractionListeners.onRemove(post)
+                                true
+                            }
+                            R.id.edit -> {
+                                onInteractionListeners.onEdit(post)
+                                true
+                            }
+
+                            else -> false
+                        }
+                    }
+                }.show()
+            }
         }
     }
 
@@ -59,7 +71,7 @@ class PostViewHolder(
                 likesCount.text = (post.likes + 1).toString()
             else likesCount.text = (post.likes).toString()
             likes.setOnClickListener {
-                onLikeListener(post)
+                onInteractionListeners.onLike(post)
             }
         }
     }
@@ -71,11 +83,8 @@ class PostViewHolder(
                 repliesCount.text = (post.replies + 1).toString()
             else repliesCount.text = (post.replies).toString()
             replies.setOnClickListener {
-                onReplyListener(post)
+                onInteractionListeners.onReply(post)
             }
         }
-
-
     }
 }
-
