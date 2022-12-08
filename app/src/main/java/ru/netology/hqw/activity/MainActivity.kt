@@ -2,6 +2,7 @@ package ru.netology.hqw.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import ru.netology.hqw.R
@@ -10,6 +11,7 @@ import ru.netology.hqw.databinding.ActivityMainBinding
 import ru.netology.hqw.dto.Post
 import ru.netology.hqw.listeners.OnInteractionListeners
 import ru.netology.hqw.utils.AndroidUtils
+import ru.netology.hqw.utils.AndroidUtils.focusAndShowKeyboard
 import ru.netology.hqw.viewModel.PostViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -47,6 +49,7 @@ class MainActivity : AppCompatActivity() {
                 return@observe
             }
             with(binding.content) {
+                binding.editingGroup.visibility = View.VISIBLE
                 requestFocus()
                 setText(post.content)
             }
@@ -68,7 +71,16 @@ class MainActivity : AppCompatActivity() {
 
                 setText("")
                 clearFocus()
-                AndroidUtils.hideKeyboard(this)
+                focusAndShowKeyboard()
+            }
+        }
+
+        binding.cancel.setOnClickListener {
+            with(binding.content) {
+                setText("")
+                clearFocus()
+                focusAndShowKeyboard()
+                binding.editingGroup.visibility = View.GONE
             }
         }
     }
