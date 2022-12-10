@@ -10,7 +10,6 @@ import ru.netology.hqw.adapter.PostAdapter
 import ru.netology.hqw.databinding.ActivityMainBinding
 import ru.netology.hqw.dto.Post
 import ru.netology.hqw.listeners.OnInteractionListeners
-import ru.netology.hqw.utils.AndroidUtils
 import ru.netology.hqw.utils.AndroidUtils.focusAndShowKeyboard
 import ru.netology.hqw.viewModel.PostViewModel
 
@@ -20,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.editingGroup.visibility = View.GONE
 
         val viewModel: PostViewModel by viewModels()
         val adapter = PostAdapter(object : OnInteractionListeners {
@@ -77,7 +77,6 @@ class MainActivity : AppCompatActivity() {
 
         binding.cancel.setOnClickListener {
             with(binding.content) {
-                setText("")
                 clearFocus()
                 focusAndShowKeyboard()
                 binding.editingGroup.visibility = View.GONE
