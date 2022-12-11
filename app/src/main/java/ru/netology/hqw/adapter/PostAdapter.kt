@@ -38,10 +38,7 @@ class PostViewHolder(
             author.text = post.author
             published.text = post.published
             content.text = post.content
-            likes.setImageResource(
-                if (post.likedByMe) R.drawable.ic_baseline_liked_24 else R.drawable.ic_baseline_favorite_24
-            )
-
+            likes.isChecked = post.likedByMe
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {
                     inflate(R.menu.menu)
@@ -68,8 +65,8 @@ class PostViewHolder(
     fun bindLike(post: Post) {
         binding.apply {
             if (post.likedByMe)
-                likesCount.text = (post.likes + 1).toString()
-            else likesCount.text = (post.likes).toString()
+                likes.text = (post.likes + 1).toString()
+            else likes.text = (post.likes).toString()
             likes.setOnClickListener {
                 onInteractionListeners.onLike(post)
             }
@@ -80,8 +77,8 @@ class PostViewHolder(
     fun bindReplies(post: Post) {
         binding.apply {
             if (post.repliedByMe)
-                repliesCount.text = (post.replies + 1).toString()
-            else repliesCount.text = (post.replies).toString()
+                replies.text = (post.replies + 1).toString()
+            else replies.text = (post.replies).toString()
             replies.setOnClickListener {
                 onInteractionListeners.onReply(post)
             }
