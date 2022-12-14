@@ -33,7 +33,6 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_default"
         android:layout_marginStart="@dimen/margin_default"
-        android:background="@android:color/background_light"
         android:contentDescription="@string/cancel_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/editing_mode"
@@ -49,17 +48,6 @@
         android:text = "@string/editing_mode"
         tools:text="@string/editing_mode"/>
 
-    <ImageButton
-        android:id="@+id/cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/background_light"
-        android:contentDescription="@string/cancel_button"
-        app:layout_constraintBottom_toBottomOf="@id/toolsMiddle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolsTop"
-        app:srcCompat="@drawable/ic_cancel_48" />
-
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/toolsMiddle"
         android:layout_width="wrap_content"
@@ -67,13 +55,23 @@
         app:barrierDirection="top"
         app:constraint_referenced_ids="content,save" />
 
+    <ImageButton
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/cancel_button"
+        app:layout_constraintBottom_toBottomOf="@id/toolsMiddle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolsTop"
+        app:srcCompat="@drawable/ic_cancel_48" />
+
     <EditText
         android:id="@+id/content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/post_text"
         android:inputType="textMultiLine"
-        android:background="@android:color/transparent"
+        android:background="@android:color/background_light"
         android:padding="@dimen/margin_default"
         android:importantForAutofill="no"
         app:layout_constraintTop_toTopOf="@id/toolsTop"
@@ -86,12 +84,11 @@
         android:id="@+id/save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_default"
         android:background="@android:color/transparent"
         android:contentDescription="@string/save"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/content"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:srcCompat="@drawable/ic_save_48"
-        />
+        tools:ignore="ImageContrastCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

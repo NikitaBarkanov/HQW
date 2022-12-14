@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                 return@observe
             }
             with(binding.content) {
-                binding.editingGroup.visibility = View.VISIBLE
+                binding.editingGroup.visibility = View.GONE
                 requestFocus()
                 setText(post.content)
             }
@@ -77,9 +77,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.cancel.setOnClickListener {
             with(binding.content) {
+                viewModel.cancel()
                 clearFocus()
                 focusAndShowKeyboard()
-                binding.editingGroup.visibility = View.GONE
+                binding.editingGroup.visibility = View.VISIBLE
             }
         }
     }

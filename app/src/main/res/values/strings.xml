@@ -13,5 +13,5 @@
     <string name="cancel_button" translatable="false">Отмена</string>
     <string name="editing_mode" translatable="false">Редактировано</string>
     <string name="editing" translatable="false">Редактировать</string>
-    <string name="menu" />
+    <string name="menu" translatable="false">Меню</string>
 </resources>
