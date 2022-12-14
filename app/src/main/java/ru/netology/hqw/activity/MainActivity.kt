@@ -77,6 +77,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.cancel.setOnClickListener {
             with(binding.content) {
+                viewModel.cancel()
                 clearFocus()
                 focusAndShowKeyboard()
                 binding.editingGroup.visibility = View.GONE

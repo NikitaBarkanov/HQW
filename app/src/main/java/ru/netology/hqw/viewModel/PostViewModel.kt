@@ -30,6 +30,10 @@ class PostViewModel: ViewModel(){
         edited.value = post
     }
 
+    fun cancel() {
+        edited.value = null
+    }
+
     fun changeContent(content: String) {
         val text = content.trim()
         if (edited.value?.content == text) {
