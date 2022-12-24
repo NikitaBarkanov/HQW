@@ -7,4 +7,5 @@ interface OnInteractionListeners {
     fun onRemove(post: Post){}
     fun onEdit(post: Post){}
     fun onReply (post: Post) {}
+    fun onYoutube (post: Post){}
 }

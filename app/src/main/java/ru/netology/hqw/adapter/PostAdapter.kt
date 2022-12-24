@@ -33,6 +33,18 @@ class PostViewHolder(
     private val binding: PostCardBinding,
     private val onInteractionListeners: OnInteractionListeners
 ) : RecyclerView.ViewHolder(binding.root) {
+
+    lateinit var post: Post
+
+    init {
+        binding.play.setOnClickListener {
+            onInteractionListeners.onYoutube(post) }
+        binding.videoCard.setOnClickListener {
+            onInteractionListeners.onYoutube(post) }
+        binding.videoLink.setOnClickListener {
+            onInteractionListeners.onYoutube(post) }
+    }
+
     fun bind(post: Post) {
         binding.apply {
             author.text = post.author
@@ -59,6 +71,7 @@ class PostViewHolder(
                 }.show()
             }
         }
+
     }
 
     @SuppressLint("SetTextI18n")

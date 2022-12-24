@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">HQW</string>
     <string name="Hello"> Hello </string>
-    <string name="likes_0" tools:ignore="ExtraTranslation" translatable="false">Нравится</string>
+    <string name="likes_0" translatable="false" tools:ignore="ExtraTranslation">Нравится</string>
     <string name="comments_0" tools:ignore="ExtraTranslation">Комментарии</string>
     <string name="replies_0" tools:ignore="ExtraTranslation">Поделиться</string>
     <string name="views_0" tools:ignore="ExtraTranslation">Просмотры</string>
@@ -14,4 +14,8 @@
     <string name="editing_mode" translatable="false">Редактировано</string>
     <string name="editing" translatable="false">Редактировать</string>
     <string name="menu" translatable="false">Меню</string>
+    <string name="chooser_share_post" translatable="false">Share post</string>
+    <string name="add_post" translatable="false">Add post</string>
+    <string name="description_play_button" translatable="false">Play video</string>
+    <string name="description_video_card" translatable="false">Silent button</string>
 </resources>

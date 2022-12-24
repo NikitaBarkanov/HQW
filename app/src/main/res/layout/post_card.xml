@@ -67,6 +67,54 @@
             app:barrierDirection="bottom"
             app:constraint_referenced_ids="avatar, published, menu" />
 
+        <ImageView
+            android:id="@+id/videoCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/description_video_card"
+            android:src="@drawable/ic_netology_48dp_foreground"
+            app:layout_constraintBottom_toTopOf="@id/videoLink"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/barrierTop"
+            tools:srcCompat="@sample/posts.json/data/video" />
+
+        <TextView
+            android:id="@+id/videoLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/videoCard"
+            app:layout_constraintBottom_toTopOf="@id/content"
+            tools:text = "YOUTUBE video"
+
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/play"
+            style="@style/Widget.AppTheme.PlayButton.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/description_play_button"
+            android:icon="@drawable/ic_baseline_play_circle_filled_24"
+            app:layout_constraintBottom_toTopOf="@id/videoLink"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/barrierTop"
+            />
+
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/videoGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:constraint_referenced_ids="play, videoCard, videoLink"
+            />
+
         <TextView
             android:id="@+id/content"
             app:layout_constraintEnd_toEndOf="parent"
