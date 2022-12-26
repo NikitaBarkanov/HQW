@@ -54,17 +54,18 @@ class MainActivity : AppCompatActivity() {
             if (post.id == 0L) {
                 return@observe
             }
-
-            val newPostLauncher = registerForActivityResult(NewPostResultContract()) { result ->
-                result ?: return@registerForActivityResult
-                viewModel.changeContent(result)
-                viewModel.save()
-            }
-
-            binding.fab.setOnClickListener {
-                newPostLauncher.launch()
-            }
         }
+
+        val newPostLauncher = registerForActivityResult(NewPostResultContract()) { result ->
+            result ?: return@registerForActivityResult
+            viewModel.changeContent(result)
+            viewModel.save()
+        }
+
+        binding.fab.setOnClickListener {
+            newPostLauncher.launch()
+        }
+
     }
 }
 
