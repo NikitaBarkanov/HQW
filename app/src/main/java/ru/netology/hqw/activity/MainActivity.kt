@@ -1,8 +1,10 @@
 package ru.netology.hqw.activity
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.result.launch
 import androidx.activity.viewModels
 import ru.netology.hqw.R
@@ -40,9 +42,24 @@ class MainActivity : AppCompatActivity() {
                     type = "text/plain"
                 }
 
-                val shareIntent =
+                val replyIntent =
                     Intent.createChooser(intent, getString(R.string.chooser_share_post))
-                startActivity(shareIntent)
+                startActivity(replyIntent)
+            }
+
+            override fun onYoutube(post: Post) {
+                if (post.video != null){
+                    val intent = intent.apply {
+                        action = Intent.ACTION_VIEW
+                        Uri.parse(post.video)
+                    }
+                    if (intent.resolveActivity(packageManager) != null){
+                        startActivity(intent)
+                    }
+                    else {
+                        Log.d("Intent", "Cant resolve")
+                    }
+                }
             }
         })
         binding.list.adapter = adapter
@@ -50,20 +67,20 @@ class MainActivity : AppCompatActivity() {
             adapter.submitList(posts)
         }
 
+        val newPostLauncher = registerForActivityResult(NewPostResultContract) { result ->
+            result ?: return@registerForActivityResult
+            viewModel.changeContent(result)
+        }
+
         viewModel.edited.observe(this) { post ->
             if (post.id == 0L) {
                 return@observe
             }
-        }
-
-        val newPostLauncher = registerForActivityResult(NewPostResultContract()) { result ->
-            result ?: return@registerForActivityResult
-            viewModel.changeContent(result)
-            viewModel.save()
+            newPostLauncher.launch(post.content)
         }
 
         binding.fab.setOnClickListener {
-            newPostLauncher.launch()
+            newPostLauncher.launch(null)
         }
 
     }

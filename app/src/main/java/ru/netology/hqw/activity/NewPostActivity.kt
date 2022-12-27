@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.text.set
 import ru.netology.hqw.databinding.ActivityNewPostBinding
 
 class NewPostActivity : AppCompatActivity() {
@@ -11,6 +12,9 @@ class NewPostActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityNewPostBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val text = intent?.getStringExtra(Intent.EXTRA_TEXT)
+        binding.edit.setText(text)
         binding.edit.requestFocus()
         binding.ok.setOnClickListener {
             val intent = Intent()

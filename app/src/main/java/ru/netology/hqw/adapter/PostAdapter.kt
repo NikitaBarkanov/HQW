@@ -2,6 +2,7 @@ package ru.netology.hqw.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.ListAdapter
@@ -37,6 +38,10 @@ class PostViewHolder(
     lateinit var post: Post
 
     init {
+        binding.likes.setOnClickListener{
+            onInteractionListeners.onLike(post)}
+        binding.replies.setOnClickListener{
+            onInteractionListeners.onReply(post) }
         binding.play.setOnClickListener {
             onInteractionListeners.onYoutube(post) }
         binding.videoCard.setOnClickListener {
@@ -51,6 +56,9 @@ class PostViewHolder(
             published.text = post.published
             content.text = post.content
             likes.isChecked = post.likedByMe
+            videoLink.text = post.video
+            if (post.video == null) binding.videoGroup.visibility = View.GONE
+            else binding.videoGroup.visibility = View.VISIBLE
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {
                     inflate(R.menu.menu)
