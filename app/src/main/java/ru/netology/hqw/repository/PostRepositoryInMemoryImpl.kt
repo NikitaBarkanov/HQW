@@ -3,7 +3,6 @@ package ru.netology.hqw.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.netology.hqw.dto.Post
-import ru.netology.hqw.viewModel.PostRepository
 
 class PostRepositoryInMemoryImpl: PostRepository {
     private var nextId = 1L

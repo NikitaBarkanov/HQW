@@ -1,4 +1,4 @@
-package ru.netology.hqw.viewModel
+package ru.netology.hqw.repository
 
 import androidx.lifecycle.LiveData
 import ru.netology.hqw.dto.Post
