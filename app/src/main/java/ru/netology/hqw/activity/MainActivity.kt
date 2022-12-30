@@ -49,9 +49,9 @@ class MainActivity : AppCompatActivity() {
 
             override fun onYoutube(post: Post) {
                 if (post.video != null){
-                    val intent = intent.apply {
+                    val intent = Intent().apply {
                         action = Intent.ACTION_VIEW
-                        Uri.parse(post.video)
+                        data = Uri.parse(post.video)
                     }
                     if (intent.resolveActivity(packageManager) != null){
                         startActivity(intent)
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
 
         val newPostLauncher = registerForActivityResult(NewPostResultContract) { result ->
             result ?: return@registerForActivityResult
-            viewModel.changeContent(result)
+            viewModel.changeContentAndSave(result)
         }
 
         viewModel.edited.observe(this) { post ->

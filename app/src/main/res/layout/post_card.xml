@@ -75,10 +75,9 @@
             android:layout_marginEnd="16dp"
             android:contentDescription="@string/description_video_card"
             android:src="@drawable/ic_netology_48dp_foreground"
-            app:layout_constraintBottom_toTopOf="@id/videoLink"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/barrierTop"
+            app:layout_constraintTop_toBottomOf="@id/content"
             tools:srcCompat="@sample/posts.json/data/video" />
 
         <TextView
@@ -88,10 +87,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/videoCard"
-            app:layout_constraintBottom_toTopOf="@id/content"
-            tools:text = "YOUTUBE video"
-
-            />
+            tools:text="YOUTUBE video" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/play"
@@ -103,8 +99,7 @@
             app:layout_constraintBottom_toTopOf="@id/videoLink"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/barrierTop"
-            />
+            app:layout_constraintTop_toBottomOf="@id/content" />
 
 
         <androidx.constraintlayout.widget.Group
@@ -133,7 +128,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="content" />
+            app:constraint_referenced_ids="videoLink" />
 
         <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/likes"

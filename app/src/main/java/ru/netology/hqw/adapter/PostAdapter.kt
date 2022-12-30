@@ -51,6 +51,7 @@ class PostViewHolder(
     }
 
     fun bind(post: Post) {
+        this.post = post
         binding.apply {
             author.text = post.author
             published.text = post.published
