@@ -8,4 +8,5 @@ interface OnInteractionListeners {
     fun onEdit(post: Post){}
     fun onReply (post: Post) {}
     fun onYoutube (post: Post){}
+    fun postLink(post: Post){}
 }
