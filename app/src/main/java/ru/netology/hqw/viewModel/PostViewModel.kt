@@ -22,19 +22,8 @@ class PostViewModel(application: Application): AndroidViewModel(application){
     val data = repository.getAll()
     val edited = MutableLiveData(empty)
 
-    fun save() {
-        edited.value?.let {
-            repository.save(it)
-        }
-        edited.value = empty
-    }
-
     fun edit(post: Post) {
         edited.value = post
-    }
-
-    fun cancel() {
-        edited.value = empty
     }
 
     fun changeContentAndSave(content: String) {

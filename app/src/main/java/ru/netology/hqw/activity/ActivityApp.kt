@@ -3,6 +3,7 @@ package ru.netology.hqw.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_INDEFINITE
 import com.google.android.material.snackbar.Snackbar
@@ -30,7 +31,7 @@ class ActivityApp : AppCompatActivity() {
                     .show()
                 return@let
             }
-
+            Toast.makeText(this, text, Toast.LENGTH_LONG).show()
             val navHostFragment =
                 supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
             navHostFragment.navController.navigate(

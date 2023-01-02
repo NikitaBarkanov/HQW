@@ -25,8 +25,7 @@ class NewPostFragment : Fragment() {
         binding.ok.setOnClickListener {
             val text = binding.edit.text.toString()
             if (text.isNotBlank()){
-                viewModel.changeContentAndSave(text)
-                viewModel.save()}
+                viewModel.changeContentAndSave(text) }
             findNavController().navigateUp()
         }
         return binding.root
