@@ -24,10 +24,8 @@
         tools:layout="@layout/fragment_new_post" />
     <fragment
         android:id="@+id/postFragment"
-        android:name="ru.netology.hqw.activity.FeedFragment"
-        android:label="PostFragment">
-        <action
-            android:id="@+id/action_feedFragment_to_postFragment"
-            app:destination="@id/newPostFragment" />
+        android:name="ru.netology.hqw.activity.PostFragment"
+        android:label="PostFragment"
+        tools:layout="@layout/post_fragment">
     </fragment>
 </navigation>

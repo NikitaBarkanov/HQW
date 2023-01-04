@@ -13,12 +13,14 @@ import ru.netology.hqw.dto.Post
 import ru.netology.hqw.listeners.OnInteractionListeners
 import ru.netology.hqw.repository.PostDiffCallback
 
-class PostAdapter (private val onInteractionListeners: OnInteractionListeners) : ListAdapter<Post, PostViewHolder>(
+class PostAdapter (private val onInteractionListeners: OnInteractionListeners) :
+    ListAdapter<Post, PostViewHolder>(
     PostDiffCallback()
 ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
-        val binding = PostCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = PostCardBinding
+            .inflate(LayoutInflater.from(parent.context), parent, false)
         return PostViewHolder(binding, onInteractionListeners)
     }
 
@@ -48,6 +50,9 @@ class PostViewHolder(
             onInteractionListeners.onYoutube(post) }
         binding.videoLink.setOnClickListener {
             onInteractionListeners.onYoutube(post) }
+        binding.root.setOnClickListener{
+            onInteractionListeners.postLink(post)
+        }
     }
 
     fun bind(post: Post) {

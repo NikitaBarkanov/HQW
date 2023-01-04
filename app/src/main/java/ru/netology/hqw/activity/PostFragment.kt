@@ -64,11 +64,7 @@ class PostFragment : Fragment() {
             }
 
             override fun postLink(post: Post) {
-                findNavController().navigate(
-                    R.id.action_feedFragment_to_newPostFragment, Bundle().apply {
-                        textArg = post.id.toString()
-                    }
-                )
+                findNavController().navigateUp()
             }
         })
         viewModel.edited.observe(viewLifecycleOwner) { post ->
