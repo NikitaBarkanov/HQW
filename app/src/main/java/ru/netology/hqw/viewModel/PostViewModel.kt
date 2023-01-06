@@ -17,7 +17,7 @@ private val empty = Post(
     likes = 0,
     repliedByMe = false,
     replies = 0,
-    video = " ",
+    video = "XXXDFDS",
     views = 0
 )
 
