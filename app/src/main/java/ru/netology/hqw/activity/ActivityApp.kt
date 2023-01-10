@@ -11,7 +11,7 @@ import ru.netology.hqw.R
 import ru.netology.hqw.activity.NewPostFragment.Companion.textArg
 import ru.netology.hqw.databinding.ActivityAppBinding
 
-class ActivityApp : AppCompatActivity(R.layout.activity_app) {
+class ActivityApp : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityAppBinding.inflate(layoutInflater)

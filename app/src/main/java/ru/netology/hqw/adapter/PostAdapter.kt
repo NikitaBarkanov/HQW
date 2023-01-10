@@ -27,8 +27,6 @@ class PostAdapter (private val onInteractionListeners: OnInteractionListeners) :
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val post = getItem(position)
         holder.bind(post)
-        holder.bindLike(post)
-        holder.bindReplies(post)
     }
 }
 
@@ -55,6 +53,7 @@ class PostViewHolder(
         }
     }
 
+    @SuppressLint("SetTextI18n")
     fun bind(post: Post) {
         this.post = post
         binding.apply {
@@ -63,6 +62,9 @@ class PostViewHolder(
             content.text = post.content
             likes.isChecked = post.likedByMe
             videoLink.text = post.video
+            likes.text = "${post.likes}"
+            replies.isChecked = post.repliedByMe
+            replies.text = "${post.replies}"
             if (post.video == null) binding.videoGroup.visibility = View.GONE
             else binding.videoGroup.visibility = View.VISIBLE
             menu.setOnClickListener {
@@ -84,31 +86,16 @@ class PostViewHolder(
                     }
                 }.show()
             }
-        }
-
-    }
-
-    @SuppressLint("SetTextI18n")
-    fun bindLike(post: Post) {
-        binding.apply {
-            if (post.likedByMe)
-                likes.text = (post.likes + 1).toString()
-            else likes.text = (post.likes).toString()
             likes.setOnClickListener {
                 onInteractionListeners.onLike(post)
-            }
-        }
-    }
-
-    @SuppressLint("SetTextI18n")
-    fun bindReplies(post: Post) {
-        binding.apply {
-            if (post.repliedByMe)
-                replies.text = (post.replies + 1).toString()
-            else replies.text = (post.replies).toString()
+                }
             replies.setOnClickListener {
                 onInteractionListeners.onReply(post)
             }
+            binding.root.setOnClickListener {
+                onInteractionListeners.postLink(post)
+            }
         }
+
     }
 }

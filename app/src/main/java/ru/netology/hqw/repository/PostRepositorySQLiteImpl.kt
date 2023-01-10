@@ -18,6 +18,7 @@ class PostRepositorySQLiteImpl(private val dao: PostDao): PostRepository {
     override fun getAll(): LiveData<List<Post>> = data
 
     override fun likeById(Id: Long) {
+        dao.likeById(Id)
         posts = posts.map {
             if (it.id != Id) it else it.copy(likedByMe = !it.likedByMe)
         }
@@ -25,6 +26,7 @@ class PostRepositorySQLiteImpl(private val dao: PostDao): PostRepository {
     }
 
     override fun replyById(Id: Long) {
+        dao.replyById(Id)
         posts = posts.map {
             if (it.id != Id) it else it.copy(repliedByMe = !it.repliedByMe)
         }
@@ -37,6 +39,7 @@ class PostRepositorySQLiteImpl(private val dao: PostDao): PostRepository {
     }
 
     override fun save(post: Post) {
+        dao.save(post)
         val id = post.id
         val saved = dao.save(post)
         posts = if (id == 0L) {

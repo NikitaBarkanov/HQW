@@ -13,6 +13,7 @@
         android:gravity="start|top"
         android:inputType="textMultiLine"
         android:background="@android:color/transparent"
+        android:importantForAutofill="no"
         />
 
     <com.google.android.material.bottomappbar.BottomAppBar

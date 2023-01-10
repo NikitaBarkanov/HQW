@@ -19,7 +19,7 @@ class PostDaoImplementation(private val db: SQLiteDatabase): PostDao {
             ${PostColumns.COLUMN_LIKES} INTEGER NOT NULL DEFAULT 0,
             ${PostColumns.COLUMN_REPLIED_BY_ME} BOOLEAN NOT NULL DEFAULT 0,
             ${PostColumns.COLUMN_REPLIES} INTEGER NOT NULL DEFAULT 0,
-            ${PostColumns.COLUMN_VIDEO} TEXT NOT NULL DEFAULT "https://www.youtube.com/",
+            ${PostColumns.COLUMN_VIDEO} TEXT,
             ${PostColumns.COLUMN_VIEWS} INTEGER NOT NULL DEFAULT 0
             );
         """.trimIndent()
@@ -73,8 +73,8 @@ class PostDaoImplementation(private val db: SQLiteDatabase): PostDao {
         db.execSQL(
             """
                 UPDATE posts SET
-                likedByMe = CASE WHEN likedByMe THEN 0 ELSE 1 END,
-                likes = likes + CASE WHEN likedByMe THEN -1 ELSE 1 END
+                likes = likes + CASE WHEN likedByMe THEN -1 ELSE 1 END,
+                likedByMe = CASE WHEN likedByMe THEN 0 ELSE 1 END
             WHERE id = ?;
             """.trimIndent(), arrayOf(Id)
         )
@@ -84,8 +84,7 @@ class PostDaoImplementation(private val db: SQLiteDatabase): PostDao {
         db.execSQL(
             """
                 UPDATE posts SET
-                repliedByMe = CASE WHEN repliedByMe THEN 0 ELSE 1 END,
-                replies = replies + CASE WHEN repliedByMe THEN -1 ELSE 1 END
+                replies = replies + 1
             WHERE id = ?;
             """.trimIndent(), arrayOf(Id)
         )
@@ -101,14 +100,22 @@ class PostDaoImplementation(private val db: SQLiteDatabase): PostDao {
 
     override fun save(post: Post): Post {
         val values = ContentValues().apply {
-            if(post.id != 0L){
-                put(PostColumns.COLUMN_ID,post.id)
-            }
             put(PostColumns.COLUMN_AUTHOR,"Me")
-            put(PostColumns.COLUMN_CONTENT,post.content)
+            put(PostColumns.COLUMN_CONTENT,"Content")
             put(PostColumns.COLUMN_PUBLISHED, "now")
+            put(PostColumns.COLUMN_VIDEO, "https://www.youtube.com/")
         }
-        val id = db.replace(PostColumns.TABLE, null, values)
+        val id = if (post.id != 0L) {
+            db.update(
+                PostColumns.TABLE,
+                values,
+                "${PostColumns.COLUMN_ID} = ?",
+                arrayOf(post.id.toString()),
+            )
+            post.id
+        } else {
+            db.insert(PostColumns.TABLE, null, values)
+        }
         db.query(
             PostColumns.TABLE,
             PostColumns.ALL_COLUMNS,
@@ -116,8 +123,8 @@ class PostDaoImplementation(private val db: SQLiteDatabase): PostDao {
             arrayOf(id.toString()),
             null,
             null,
-            null
-        ).use{
+            null,
+        ).use {
             it.moveToNext()
             return map(it)
         }

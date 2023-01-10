@@ -157,18 +157,6 @@
             style="@style/Widget.AppTheme.ShareButton"
             />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/comments"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_default"
-            android:contentDescription="@string/comments_0"
-            app:layout_constraintStart_toEndOf="@id/replies"
-            app:layout_constraintTop_toBottomOf="@id/footer"
-            app:icon="@drawable/ic_baseline_comment_24"
-            tools:text="@sample/posts.json/data/comments"
-            style="@style/Widget.AppTheme.ShareButton"
-            />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/views"
