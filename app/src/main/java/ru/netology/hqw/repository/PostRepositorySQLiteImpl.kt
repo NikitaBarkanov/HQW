@@ -20,17 +20,29 @@ class PostRepositorySQLiteImpl(private val dao: PostDao): PostRepository {
     override fun likeById(Id: Long) {
         dao.likeById(Id)
         posts = posts.map {
-            if (it.id != Id) it else it.copy(likedByMe = !it.likedByMe)
+            if (it.id != Id) it
+            else it.copy(likedByMe = !it.likedByMe, likes = likesCount(it))
         }
         data.value = posts
+    }
+
+    private fun likesCount(post: Post): Int{
+       val ps: Post = if (post.likedByMe) {post.copy(likes = post.likes - 1)}
+        else {post.copy(likes = post.likes + 1)}
+        return ps.likes
     }
 
     override fun replyById(Id: Long) {
         dao.replyById(Id)
         posts = posts.map {
-            if (it.id != Id) it else it.copy(repliedByMe = !it.repliedByMe)
+            if (it.id != Id) it else it.copy(repliedByMe = !it.repliedByMe, replies = repliesCount(it))
         }
         data.value = posts
+    }
+    private fun repliesCount(post: Post): Int{
+        val ps: Post = if (post.repliedByMe) {post.copy(replies = post.replies - 1)}
+        else {post}
+        return ps.replies
     }
 
     override fun removeById(id: Long) {

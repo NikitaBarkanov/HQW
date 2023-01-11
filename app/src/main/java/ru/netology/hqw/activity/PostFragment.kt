@@ -72,7 +72,7 @@ class PostFragment : Fragment() {
                 return@observe
             }
             findNavController()
-                .navigate(R.id.action_feedFragment_to_newPostFragment, Bundle().apply {
+                .navigate(R.id.action_postFragment_to_newPostFragment, Bundle().apply {
                     textArg = post.content
                 })
 

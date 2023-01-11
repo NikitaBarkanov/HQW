@@ -31,5 +31,7 @@
         android:name="ru.netology.hqw.activity.PostFragment"
         android:label="PostFragment"
         tools:layout="@layout/post_fragment">
+        <action android:id="@+id/action_postFragment_to_newPostFragment"
+            app:destination="@+id/newPostFragment"/>
     </fragment>
 </navigation>
