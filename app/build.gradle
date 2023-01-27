@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'org.jetbrains.kotlin.kapt'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -38,6 +39,7 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.core:core-ktx:+'
     def core_version = "1.9.0"
     def appcompat_version = "1.5.1"
     def mdc_version = "1.6.1"
@@ -53,6 +55,8 @@ dependencies {
     def navigation_version = "2.5.3"
     def navigation_fragment_version = "2.5.3"
     def room_version = "2.5.0"
+    def firebase_version = "30.4.1"
+    def play_services_base_version = "18.1.0"
 
     implementation "androidx.core:core-ktx:$core_version"
     implementation "androidx.appcompat:appcompat:$appcompat_version"
@@ -68,6 +72,9 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_fragment_version"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+    implementation platform("com.google.firebase:firebase-bom:$firebase_version")
+    implementation "com.google.firebase:firebase-messaging-ktx"
+    implementation "com.google.android.gms:play-services-base:$play_services_base_version"
 
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test.ext:junit:$ext_junit_version"

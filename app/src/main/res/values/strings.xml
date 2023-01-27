@@ -18,4 +18,8 @@
     <string name="add_post" translatable="false">Add post</string>
     <string name="description_play_button" translatable="false">Play video</string>
     <string name="description_video_card" translatable="false">Silent button</string>
+    <string name="notification_user_liked" translatable="false">User %1$s liked %2$s\'s post</string>
+    <string name="notification_user_published" translatable="false">User %1$s published a new post-></string>
+    <string name="channel_remote_name" translatable="false">Server notifications</string>
+    <string name="channel_remote_description" translatable="false">Notifications from remote server</string>
 </resources>
