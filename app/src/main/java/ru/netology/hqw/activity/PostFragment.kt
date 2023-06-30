@@ -1,3 +1,4 @@
+/*
 package ru.netology.hqw.activity
 
 import android.content.Intent
@@ -27,6 +28,8 @@ class PostFragment : Fragment() {
         val binding = PostFragmentBinding.inflate(layoutInflater)
 
         val viewModel by viewModels<PostViewModel>(ownerProducer = ::requireParentFragment)
+*/
+/**//*
 
         val viewHolder = PostViewHolder(binding.postLayout, object : OnInteractionListeners {
             override fun onEdit(post: Post) {
@@ -88,4 +91,4 @@ class PostFragment : Fragment() {
 
         return binding.root
     }
-}
+}*/

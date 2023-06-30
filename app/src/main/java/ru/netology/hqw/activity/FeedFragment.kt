@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -64,15 +65,18 @@ class FeedFragment : Fragment() {
 
             override fun postLink(post: Post){
                 findNavController().navigate(
-                    R.id.action_feedFragment_to_postFragment, Bundle().apply {
+                    R.id.action_feedFragment_to_newPostFragment, Bundle().apply {
                         textArg = post.id.toString()
                     }
                 )
             }
         })
         binding.list.adapter = adapter
-        viewModel.data.observe(viewLifecycleOwner) { posts ->
-            adapter.submitList(posts)
+        viewModel.data.observe(viewLifecycleOwner) { state ->
+            adapter.submitList(state.posts)
+            binding.progress.isVisible = state.loading
+            binding.errorGroup.isVisible = state.error
+            binding.emptyText.isVisible = state.empty
         }
 
 
@@ -87,7 +91,7 @@ class FeedFragment : Fragment() {
         }
 
         binding.root.setOnClickListener{
-            findNavController().navigate(R.id.action_feedFragment_to_postFragment)
+            findNavController().navigate(R.id.action_feedFragment_to_newPostFragment)
         }
 
         binding.fab.setOnClickListener {

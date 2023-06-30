@@ -1,3 +1,4 @@
+/*
 package ru.netology.hqw.repository
 
 import android.content.Context
@@ -176,4 +177,4 @@ class PostRepositoryFileImpl(private val context: Context): PostRepository {
             it.write(gson.toJson(posts))
         }
     }
-}
+}*/

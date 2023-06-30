@@ -1,3 +1,4 @@
+/*
 package ru.netology.hqw.repository
 
 import android.content.Context
@@ -74,4 +75,4 @@ class PostRepositorySharedPrefIImpl (context : Context): PostRepository {
             apply()
         }
     }
-}
+}*/
