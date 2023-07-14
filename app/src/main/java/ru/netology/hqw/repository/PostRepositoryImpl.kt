@@ -35,8 +35,33 @@ class PostRepositoryImpl() : PostRepository {
     }
 
     override fun likeById(Id: Long) {
-        // TODO: do this in homework
+        val request: Request = Request.Builder()
+            .post(gson.toJson(Id).toRequestBody(jsonType))
+            .url("${BASE_URL}/api/slow/posts/${Id}/likes")
+            .build()
+
+        return client.newCall(request)
+            .execute()
+            .let { it.body?.string() ?: throw RuntimeException("body is null") }
+            .let {
+                gson.fromJson(it, Post::class.java)
+            }
     }
+
+    override fun unLikeById(Id: Long) {
+        val request: Request = Request.Builder()
+            .delete()
+            .url("${BASE_URL}/api/slow/posts/${Id}/likes")
+            .build()
+
+        return client.newCall(request)
+            .execute()
+            .let { it.body?.string() ?: throw RuntimeException("body is null") }
+            .let {
+                gson.fromJson(it, Post::class.java)
+            }
+    }
+
 
     override fun replyById(Id: Long) {
         TODO("Not yet implemented")

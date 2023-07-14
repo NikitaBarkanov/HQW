@@ -25,6 +25,7 @@ private val empty = Post(
     views = 0
 )
 
+@Suppress("UNCHECKED_CAST")
 class PostViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: PostRepository = PostRepositoryImpl()
     private val _data = MutableLiveData(FeedModel())
@@ -61,7 +62,12 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
                 _postCreated.postValue(Unit)
             }
         }
-        edited.value = empty
+        try {
+        edited.value = empty }
+        catch(e: Exception){
+            println("No connection")
+            println(e.message)
+        }
     }
 
     fun edit(post: Post) {
@@ -77,9 +83,21 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun likeById(id: Long) {
-        thread { repository.likeById(id) }
+        thread {
+            val postLikes = repository.likeById(id)
+            val newPosts = _data.value?.posts.orEmpty().map { if (it.id == id) postLikes else it }
+            _data.postValue(FeedModel(posts = newPosts as List<Post>))
+        }
     }
 
+    fun unlikeById(id: Long) {
+        thread {
+            val unlikedPost = repository.unLikeById(id)
+            val newPosts = _data.value?.posts.orEmpty().map{ if (it.id == id) unlikedPost else it }
+            _data.postValue(FeedModel(posts = newPosts as List<Post>))
+        }
+
+    }
     fun removeById(id: Long) {
         thread {
             val old = _data.value?.posts.orEmpty()

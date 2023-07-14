@@ -73,6 +73,8 @@ class FCMService : FirebaseMessagingService() {
         println(token)
     }
 
+
+
     @SuppressLint("StringFormatInvalid")
     private fun handleLike(content: Like) {
         val notification = NotificationCompat.Builder(this, channelId)
@@ -91,16 +93,7 @@ class FCMService : FirebaseMessagingService() {
                 this,
                 Manifest.permission.POST_NOTIFICATIONS
             ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return
-        }
+        )
         NotificationManagerCompat.from(this)
             .notify(Random.nextInt(100_000), notification)
     }
@@ -124,16 +117,7 @@ class FCMService : FirebaseMessagingService() {
                 this,
                 Manifest.permission.POST_NOTIFICATIONS
             ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return
-        }
+        )
         NotificationManagerCompat.from(this)
             .notify((Random.nextInt(100_000)+31), notification)
     }
