@@ -80,6 +80,18 @@
             app:layout_constraintTop_toBottomOf="@id/content"
             tools:srcCompat="@sample/posts.json/data/video" />
 
+        <ImageView
+            android:id="@+id/attachment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_default"
+            android:contentDescription="@string/post_image"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/content"
+            tools:srcCompat="@sample/posts.json/data/attachment" />
+
         <TextView
             android:id="@+id/videoLink"
             android:layout_width="wrap_content"

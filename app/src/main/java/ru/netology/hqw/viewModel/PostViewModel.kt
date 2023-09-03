@@ -15,6 +15,7 @@ import kotlin.concurrent.thread
 private val empty = Post(
     id = 0,
     author = " ",
+    avatar = " ",
     content = " ",
     published = " ",
     likedByMe = false,
@@ -22,7 +23,8 @@ private val empty = Post(
     repliedByMe = false,
     replies = 0,
     video = "https://www.youtube.com/watch?v=jIIW8lnqPYU&list=PLONqCDlUR74rHLRSTKl4UjpiFcn2E8M6O",
-    views = 0
+    views = 0,
+    attachment = null,
 )
 
 @Suppress("UNCHECKED_CAST")

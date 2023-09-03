@@ -11,7 +11,8 @@
       "repliedByMe": false,
       "replies": "0",
       "video": "@sample/posts_avatars",
-      "views": "0"
+      "views": "0",
+      "attachment": "@sample/posts_attachments"
     }
   ]
 }

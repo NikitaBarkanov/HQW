@@ -1,12 +1,12 @@
 package ru.netology.hqw.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import ru.netology.hqw.R
 import ru.netology.hqw.databinding.PostCardBinding
 import ru.netology.hqw.dto.Post
@@ -32,52 +32,55 @@ class PostAdapter (private val onInteractionListeners: OnInteractionListeners) :
 
 class PostViewHolder(
     private val binding: PostCardBinding,
-    private val onInteractionListeners: OnInteractionListeners
+    private val onInteractionListener: OnInteractionListeners,
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    lateinit var post: Post
+    companion object {
+        private const val BASE_URL = "http://10.0.2.2:9999"
 
-    init {
-        binding.likes.setOnClickListener{
-            onInteractionListeners.onLike(post)}
-        binding.replies.setOnClickListener{
-            onInteractionListeners.onReply(post) }
-        binding.play.setOnClickListener {
-            onInteractionListeners.onYoutube(post) }
-        binding.videoCard.setOnClickListener {
-            onInteractionListeners.onYoutube(post) }
-        binding.videoLink.setOnClickListener {
-            onInteractionListeners.onYoutube(post) }
-        binding.root.setOnClickListener{
-            onInteractionListeners.postLink(post)
-        }
     }
 
-    @SuppressLint("SetTextI18n")
     fun bind(post: Post) {
-        this.post = post
         binding.apply {
             author.text = post.author
             published.text = post.published
             content.text = post.content
             likes.isChecked = post.likedByMe
-            videoLink.text = post.video
             likes.text = "${post.likes}"
-            replies.isChecked = post.repliedByMe
-            replies.text = "${post.replies}"
-            if (post.video == null) binding.videoGroup.visibility = View.GONE
-            else binding.videoGroup.visibility = View.VISIBLE
+
+
+            Glide.with(avatar)
+                .load("${BASE_URL}/avatars/${post.avatar}")
+                .circleCrop()
+                .placeholder(R.drawable.ic_loading_24)
+                .error(R.drawable.ic_error_24)
+                .timeout(10_000)
+                .into(avatar)
+
+            .let {
+                if (post.attachment != null) {
+                    Glide.with(attachment)
+                        .load("${BASE_URL}/images/${post.attachment.url}")
+                        //.override(1800, 700)
+                        .placeholder(R.drawable.ic_loading_24)
+                        .error(R.drawable.ic_error_24)
+                        .timeout(10_000)
+                        .into(attachment)
+                }
+            }
+            attachment.isVisible = post.attachment != null
+
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {
                     inflate(R.menu.menu)
                     setOnMenuItemClickListener { item ->
                         when (item.itemId) {
                             R.id.remove -> {
-                                onInteractionListeners.onRemove(post)
+                                onInteractionListener.onRemove(post)
                                 true
                             }
                             R.id.edit -> {
-                                onInteractionListeners.onEdit(post)
+                                onInteractionListener.onEdit(post)
                                 true
                             }
 
@@ -86,16 +89,14 @@ class PostViewHolder(
                     }
                 }.show()
             }
+
             likes.setOnClickListener {
-                onInteractionListeners.onLike(post)
-                }
-            replies.setOnClickListener {
-                onInteractionListeners.onReply(post)
+                onInteractionListener.onLike(post)
             }
-            binding.root.setOnClickListener {
-                onInteractionListeners.postLink(post)
+
+            replies.setOnClickListener {
+                onInteractionListener.onReply(post)
             }
         }
-
     }
 }

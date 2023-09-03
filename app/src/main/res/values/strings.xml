@@ -26,4 +26,5 @@
     <string name="error_loading" />
     <string name="retry_loading" />
     <string name="google_play_unavailable" />
+    <string name="post_image" />
 </resources>
