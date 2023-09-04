@@ -2,7 +2,7 @@ package ru.netology.hqw.dto
 
 data class Post (
     val id: Long = 0,
-    val avatar: String,
+    val authorAvatar: String,
     val author: String = " ",
     val content: String = " ",
     val published: String = " ",

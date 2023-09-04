@@ -26,7 +26,7 @@ data class PostEntity(
             PostEntity(
                 dto.id,
                 dto.author,
-                dto.avatar,
+                dto.authorAvatar,
                 dto.content,
                 dto.published,
                 dto.likedByMe,

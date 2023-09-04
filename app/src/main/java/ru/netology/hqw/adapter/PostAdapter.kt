@@ -49,8 +49,9 @@ class PostViewHolder(
             likes.text = "${post.likes}"
 
 
+
             Glide.with(avatar)
-                .load("${BASE_URL}/avatars/${post.avatar}")
+                .load("${BASE_URL}/avatars/${post.authorAvatar}")
                 .circleCrop()
                 .placeholder(R.drawable.ic_loading_24)
                 .error(R.drawable.ic_error_24)
@@ -61,7 +62,7 @@ class PostViewHolder(
                 if (post.attachment != null) {
                     Glide.with(attachment)
                         .load("${BASE_URL}/images/${post.attachment.url}")
-                        //.override(1800, 700)
+                        .override(attachment.width, attachment.height)
                         .placeholder(R.drawable.ic_loading_24)
                         .error(R.drawable.ic_error_24)
                         .timeout(10_000)
@@ -69,6 +70,8 @@ class PostViewHolder(
                 }
             }
             attachment.isVisible = post.attachment != null
+            videoGroup.isVisible = post.video != null
+
 
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {
