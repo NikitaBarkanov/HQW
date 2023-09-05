@@ -1,5 +1,6 @@
 package ru.netology.hqw.adapter
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
@@ -7,6 +8,8 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import ru.netology.hqw.R
 import ru.netology.hqw.databinding.PostCardBinding
 import ru.netology.hqw.dto.Post
@@ -66,7 +69,29 @@ class PostViewHolder(
                         .placeholder(R.drawable.ic_loading_24)
                         .error(R.drawable.ic_error_24)
                         .timeout(10_000)
-                        .into(attachment)
+                        .into(object : CustomTarget<Drawable>() {
+                            override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
+                                // Получаем размеры изображения
+                                val width = resource.intrinsicWidth
+                                val height = resource.intrinsicHeight
+
+                                // Получаем размеры экрана
+                                val displayMetrics = binding.root.context.resources.displayMetrics
+                                val screenWidth = displayMetrics.widthPixels
+
+                                // Рассчитываем высоту изображения в соответствии с шириной экрана
+                                val calculatedHeight = (screenWidth.toFloat() / width.toFloat() * height).toInt()
+
+                                // Устанавливаем размеры в ImageView
+                                binding.attachment.layoutParams.width = screenWidth
+                                binding.attachment.layoutParams.height = calculatedHeight
+                                binding.attachment.setImageDrawable(resource)
+                            }
+
+                            override fun onLoadCleared(placeholder: Drawable?) {
+                                // Метод вызывается, когда изображение было очищено
+                            }
+                        })
                 }
             }
             attachment.isVisible = post.attachment != null
